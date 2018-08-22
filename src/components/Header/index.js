@@ -2,7 +2,7 @@ import React from 'react'
 import { Row, Col } from 'antd'
 import './index.less'
 import Util from '../../utils/utils'
-import Axios from '../../Axios'
+import Axios from '../../axios'
 
 export default class Header extends React.Component {
   componentWillMount() {

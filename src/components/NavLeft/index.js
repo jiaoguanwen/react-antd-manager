@@ -1,5 +1,6 @@
 import React from 'react'
 import MenuConfig from '../../config/menuConfig'
+import { NavLink } from 'react-router-dom'
 import { Menu } from 'antd'
 import './index.less'
 
@@ -23,7 +24,9 @@ export default class NavLeft extends React.Component {
       if (item.children) {
         return <SubMenu title={item.title} key={item.key}>{this.renderMenu(item.children)}</SubMenu>
       }
-      return <Menu.Item title={item.title} key={item.key}>{item.title}</Menu.Item>
+      return <Menu.Item title={item.title} key={item.key}>
+        <NavLink to={'/admin' + item.key}>{item.title}</NavLink>
+      </Menu.Item>
     })
   }
 
@@ -40,12 +43,6 @@ export default class NavLeft extends React.Component {
           <h1>Access</h1>
         </div>
         <Menu theme="dark">
-          {/* <SubMenu key="sub1" title="Menu">
-            <Menu.Item key="1">1</Menu.Item>
-            <Menu.Item key="2">2</Menu.Item>
-            <Menu.Item key="3">3</Menu.Item>
-            <Menu.Item key="4">4</Menu.Item>
-          </SubMenu> */}
           {this.state.menuTreeNode}
         </Menu>
       </div>
