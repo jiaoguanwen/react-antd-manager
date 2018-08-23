@@ -1,5 +1,5 @@
 import React from 'react'
-import { HashRouter, Route } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import App from './App'
 import Login from './pages/login'
 import Admin from './admin'
@@ -14,8 +14,10 @@ export default class IRouter extends React.Component {
           <Route path="/login" component={Login} />
           <Route path="/admin" render={() =>
             <Admin>
-              <Route path="/admin/ui/buttons" component={Buttons} />
-              <Route component={NotMatch} />
+              <Switch>
+                <Route path="/admin/ui/buttons" component={Buttons} />
+                <Route component={NotMatch} />
+              </Switch>
             </Admin>
           } />
           <Route path="/order/detail" component={Login} />
