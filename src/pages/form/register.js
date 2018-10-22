@@ -10,7 +10,6 @@ import {
   Switch,
   DatePicker,
   TimePicker,
-  upload,
   Icon,
   message,
   InputNumber,
@@ -186,7 +185,7 @@ class FromRegister extends React.Component {
               {getFieldDecorator('userImg')(
                 <Checkbox>
                   我已阅读过
-                  <a href="javascript: void(0)">慕课协议</a>
+                  <a href="###">慕课协议</a>
                 </Checkbox>
               )}
             </FromItem>
