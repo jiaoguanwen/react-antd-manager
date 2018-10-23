@@ -47,6 +47,7 @@ export default class BasicTable extends React.Component {
     ]
     data.map((item, index) => {
       item.key = index
+      return undefined
     })
     this.setState({
       dataSource: data
@@ -69,12 +70,40 @@ export default class BasicTable extends React.Component {
         if (res.code === 0) {
           res.result.list.map((item, index) => {
             item.key = index
+            return undefined
           })
           this.setState({
-            dataSource2: res.result.list
+            dataSource2: res.result.list,
+            pagination: Utils.pagination(res, current => {
+              console.log(current)
+              _this.params.page = current
+              this.request()
+            })
           })
         }
       })
+  }
+
+  onRowClick = (record, index) => {
+    let selectKey = [index]
+    Modal.info({
+      title: '信息',
+      content: `用户名：${record.userName}，用户爱好：${record.interest}`
+    })
+    this.setState({
+      selectedRowKeys: selectKey,
+      selectItem: record
+    })
+  }
+
+  handleDelete = () => {
+    Modal.confirm({
+      title: '删除提示',
+      content: `您确定要删除这些数据吗？`,
+      onOk: () => {
+        message.success('删除成功')
+      }
+    })
   }
 
   render() {
@@ -146,6 +175,22 @@ export default class BasicTable extends React.Component {
         dataIndex: 'time'
       }
     ]
+    const selectedRowKeys = this.state.selectedRowKeys
+    const rowSelection = {
+      type: 'radio',
+      // 目前来看，表格前面选择器和row选择是独立的，所以可以把他们关联起来，row点击后设置选择器的选中项，选择器选择后调row选择的方法
+      onChange: (selectedRowKeys, selectedRows) => {
+        this.onRowClick(selectedRows[0], selectedRowKeys[0])
+      },
+      selectedRowKeys
+    }
+    const rowCheckSelection = {
+      type: 'checkbox',
+      onChange: (selectedRowKeys, selectedRows) => {
+        console.log(selectedRowKeys)
+        console.log(selectedRows)
+      }
+    }
     return (
       <div>
         <Card title="基础表格">
@@ -162,6 +207,40 @@ export default class BasicTable extends React.Component {
             columns={columns}
             dataSource={this.state.dataSource2}
             pagination={false}
+          />
+        </Card>
+        <Card title="Mock-单选" style={{ margin: '10px 0' }}>
+          <Table
+            bordered
+            rowSelection={rowSelection}
+            onRow={(record, index) => ({
+              onClick: () => {
+                this.onRowClick(record, index)
+              }
+            })}
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={false}
+          />
+        </Card>
+        <Card title="Mock-多选" style={{ margin: '10px 0' }}>
+          <div style={{ marginBottom: 10 }}>
+            <Button onClick={this.handleDelete}>删除</Button>
+          </div>
+          <Table
+            bordered
+            rowSelection={rowCheckSelection}
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={false}
+          />
+        </Card>
+        <Card title="Mock-表格分页" style={{ margin: '10px 0' }}>
+          <Table
+            bordered
+            columns={columns}
+            dataSource={this.state.dataSource2}
+            pagination={this.state.pagination}
           />
         </Card>
       </div>

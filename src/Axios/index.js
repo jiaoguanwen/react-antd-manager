@@ -26,13 +26,13 @@ export default class Axios {
       loading = document.getElementById('ajaxLoading')
       loading.style.display = 'block'
     }
-    let baseApi = 'https://www.easy-mock.com/mock/5a7278e28d0c633b9c4adbd7/api'
+    let baseApi = 'https://easy-mock.com/mock/5bce76caeaf09a28dd3eb6af/api'
     return new Promise((resolve, reject) => {
       axios({
         url: options.url,
         method: 'get',
         baseURL: baseApi,
-        timeout: 5000,
+        timeout: 50000,
         params: (options.data && options.data.params) || ''
       }).then(response => {
         if (options.data && options.data.isShowLoading !== false) {
