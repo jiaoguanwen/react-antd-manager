@@ -14,6 +14,7 @@ import Carousel from './pages/ui/carousel'
 import FormLogin from './pages/form/login'
 import FormRegister from './pages/form/register'
 import BasicTable from './pages/table/basicTable'
+import highTable from './pages/table/highTable'
 import NotMatch from './pages/notMatch'
 
 export default class IRouter extends React.Component {
@@ -38,6 +39,7 @@ export default class IRouter extends React.Component {
                   <Route path="/admin/form/login" component={FormLogin} />
                   <Route path="/admin/form/reg" component={FormRegister} />
                   <Route path="/admin/table/basic" component={BasicTable} />
+                  <Route path="/admin/table/high" component={highTable} />
                   <Route component={NotMatch} />
                 </Switch>
               </Admin>
