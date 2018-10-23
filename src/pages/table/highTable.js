@@ -1,7 +1,7 @@
 import React from 'react'
 import { Card, Table, Modal, Button, message, Badge } from 'antd'
 import axios from './../../axios/index'
-export default class BasicTable extends React.Component {
+export default class HighTable extends React.Component {
   state = {}
   params = {
     page: 1
@@ -25,6 +25,7 @@ export default class BasicTable extends React.Component {
         if (res.code === 0) {
           res.result.list.map((item, index) => {
             item.key = index
+            item.userName = item.username
             return undefined
           })
           this.setState({
@@ -136,7 +137,7 @@ export default class BasicTable extends React.Component {
         key: 'id',
         width: 80,
         fixed: 'left',
-        dataIndex: 'id'
+        dataIndex: 'id',
       },
       {
         title: '用户名',
@@ -175,7 +176,7 @@ export default class BasicTable extends React.Component {
         key: 'interest',
         width: 80,
         dataIndex: 'interest',
-        render(abc) {
+        render(interest) {
           let config = {
             '1': '游泳',
             '2': '打篮球',
@@ -186,12 +187,60 @@ export default class BasicTable extends React.Component {
             '7': '桌球',
             '8': '麦霸'
           }
-          return config[abc]
+          return config[interest]
         }
       },
       {
         title: '生日',
         key: 'birthday',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday1',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday2',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday3',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday4',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday5',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday6',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday7',
+        width: 120,
+        dataIndex: 'birthday'
+      },
+      {
+        title: '生日',
+        key: 'birthday8',
         width: 120,
         dataIndex: 'birthday'
       },
@@ -376,7 +425,7 @@ export default class BasicTable extends React.Component {
             columns={columns2}
             dataSource={this.state.dataSource}
             pagination={false}
-            scroll={{ x: 2650 }}
+            scroll={{ x: 1680 }}
           />
         </Card>
         <Card title="表格排序" style={{ margin: '10px 0' }}>
